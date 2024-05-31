@@ -1,37 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package prog.proyectobase;
+package com.mycompany.examenjunio;
 
-/**
- *
- * @author larapresa
- */
-// Clase que hereda de Persona y añade el atributo curso
-public class Estudiante extends Persona {
-
+public class Estudiante{
     private String curso;
-
-    // Constructor
-    public Estudiante(String nombre, String apellidos, String dni, String curso) {
+    float[][] notas = new float[3][3];
+    
+    public Estudiante(String nombre, String apellidos, String dni, String curso, float[][] notas){
         super(nombre, apellidos, dni);
         this.curso = curso;
+        this.notas = notas;
     }
-
-    // Método getter para el curso
-    public String getCurso() {
+    public String getCurso(){
         return curso;
     }
-
-    // Método setter para el curso
-    public void setCurso(String curso) {
+    public void setCurso(String curso){
         this.curso = curso;
     }
-
+    public float[][] getNotas(){
+        return notas;
+    }
     @Override
-    public String toString() {
-        String contenido = "Nombre: " + nombre + " Apellidos: " + apellidos + " DNI: " + dni + " Curso: " + curso;
-        return contenido;
+    public String toString(){
+        String contenido
     }
 }

@@ -31,7 +31,7 @@ public class Principal {
         // 1º fila: notas de 3 exámenes del 1º trimestre
         // 2º fila: notas de 3 exámenes del 2º trimestre
         // 3º fila: notas de 3 exámenes del 3º trimestre
-        double[][] notas = {
+        double[][] notas = {_
             {7.5, 8.1, 6.9},
             {8.3, 7.6, 6.8},
             {8.9, 6.7, 7.2}
