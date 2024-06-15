@@ -10,8 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,9 +35,9 @@ public class Principal {
         // 2º fila: notas de 3 exámenes del 2º trimestre
         // 3º fila: notas de 3 exámenes del 3º trimestre
         double[][] notas = {
-                { 7.5, 8.1, 6.9 },
-                { 8.3, 7.6, 6.8 },
-                { 8.9, 6.7, 7.2 }
+            {7.5, 8.1, 6.9},
+            {8.3, 7.6, 6.8},
+            {8.9, 6.7, 7.2}
         };
 
         // Se muestra el menú mientras fin no sea igual a true
@@ -69,13 +70,14 @@ public class Principal {
 
                     case 4:
                         System.out.println("Opción 4.");
-                        System.out.println("Escritura de los estudiantes en fichero de salida."); {
-                        try {
-                            escrituraFichero(listadoEstudiantes);
-                        } catch (FileNotFoundException ex) {
+                        System.out.println("Escritura de los estudiantes en fichero de salida.");
+                         {
+                            try {
+                                escrituraFichero(listadoEstudiantes);
+                            } catch (FileNotFoundException ex) {
 
+                            }
                         }
-                    }
 
                         break;
 
@@ -102,8 +104,7 @@ public class Principal {
     }
 
     /**
-     * Método que muestra un menú por pantalla y devuelve la opción elegida por
-     * el usuario/a
+     * Método que muestra un menú por pantalla y devuelve la opción elegida por el usuario/a
      *
      * @return <code>option</code> con la opción del menú escogida
      */
@@ -129,12 +130,13 @@ public class Principal {
 
     // Este método añade 5 estudiantes al ArrayList estudiantes
     public static List<Estudiante> crearEstudiantes() {
-        List<Estudiante> estudiantes = new ArrayList<>();
+        List<Estudiante> estudiantes = new LinkedList<>();
         estudiantes.add(new Estudiante("Juan", "Pérez", "12345678A", "Matemáticas"));
         estudiantes.add(new Estudiante("María", "Gómez", "23456789B", "Física"));
         estudiantes.add(new Estudiante("Carlos", "López", "34567890C", "Química"));
         estudiantes.add(new Estudiante("Laura", "Martínez", "45678901D", "Historia"));
         estudiantes.add(new Estudiante("Pedro", "Sánchez", "56789012E", "Biología"));
+        estudiantes.add(new Estudiante("Adrian", "Saenz de Magarola", "18061668K", "Daw"));
         return estudiantes;
     }
 
@@ -146,13 +148,12 @@ public class Principal {
 
             if (dni.equals(estudiante.getDni())) {
 
-                /*
-                 * System.out.println("Nombre: " + estudiante.getNombre() + " " +
-                 * estudiante.getApellidos());
-                 * System.out.println("DNI: " + estudiante.getDni());
-                 * System.out.println("Curso: " + estudiante.getCurso());
-                 */
-                System.out.println(estudiante.toString());
+                System.out.println("Nombre: " + estudiante.getNombre() + " "
+                        + estudiante.getApellidos());
+                System.out.println("DNI: " + estudiante.getDni());
+                System.out.println("Curso: " + estudiante.getCurso());
+
+                //System.out.println(estudiante.toString());
                 // Si hemos encontrado el dni devolvemos 0 y terminamos
                 return 0;
             }
@@ -172,7 +173,7 @@ public class Principal {
         double sumaSegundaFila = 0;
         double sumaTerceraFila = 0;
 
-        // Sumar las notas de cada fila
+        // Sumar las notas de cada  
         for (int i = 0; i < notas.length; i++) {
             for (int j = 0; j < notas[i].length; j++) {
                 if (i == 0) {
@@ -186,7 +187,8 @@ public class Principal {
         }
 
         // Calcular la nota media final
-        double notaMediaFinal = (sumaPrimeraFila / 3) * (1.0 / 3)
+        double notaMediaFinal
+                = (sumaPrimeraFila / 3) * (1.0 / 3)
                 + (sumaSegundaFila / 3) * (1.0 / 3)
                 + (sumaTerceraFila / 3) * (1.0 / 3);
 

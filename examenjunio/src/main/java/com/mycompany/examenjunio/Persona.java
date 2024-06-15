@@ -35,6 +35,8 @@ public class Persona{
         @Override
         public String toString(){
             String contenido = "Nombre: " + nombre + " Apellidos: " + apellidos + " Dni: " + dni;
+            
+            System.out.println("");
             return contenido;
         }
 }
