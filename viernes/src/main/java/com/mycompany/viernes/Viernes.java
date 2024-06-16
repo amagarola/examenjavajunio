@@ -54,7 +54,7 @@ public class Viernes {
             System.out.println("Escriba la seleccion");
             opcion = teclado.nextInt();
             teclado.nextLine();
-        } while (opcion < 1 || opcion > 5);
+        } while (opcion > 1 || opcion < 5);
         return opcion;
     }
 
