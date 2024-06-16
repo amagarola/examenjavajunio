@@ -42,7 +42,7 @@ public class domingo {
                         if (result == -1) {
                             System.out.println("El DNI no existe");
                         }
-                        break;     
+                        break;
                     case 3:
                         System.out.println("Caso 3");
                         System.out.println("Se va a calcular la nota media del curso");
@@ -52,7 +52,7 @@ public class domingo {
                     case 4:
                         System.out.println("Caso 4");
                         System.out.println("Escritura de los estudiantes en fichero de salida");
-                        {
+                         {
                             try {
                                 escrituraFichero(listadoEstudiantes);
                             } catch (FileNotFoundException ex) {
@@ -106,7 +106,7 @@ public class domingo {
         estudiantes.add(new Estudiante("Carlos", "López", "34567890C", "Química"));
         estudiantes.add(new Estudiante("Laura", "Martínez", "45678901D", "Historia"));
         estudiantes.add(new Estudiante("Pedro", "Sánchez", "56789012E", "Biología"));
-        estudiantes.add(new Estudiante("Adrian", "Saenz de Magarola", "18061668K", "Daw"));
+        estudiantes.add(new Estudiante("Adrian", "Magarola", "18061668K", "Daw"));
         return estudiantes;
     }
 
@@ -126,41 +126,36 @@ public class domingo {
     }
 
     public static double calculaNotaMedia(double[][] notas) {
-        double sumaPrimeraFila = 0;
-        double sumaSegundaFila = 0;
-        double sumaTerceraFila = 0;
+        double sumaPrimeraFila = 0, sumaSegundaFila = 0, sumaTerceraFila = 0;
+
         for (int i = 0; i < notas.length; i++) {
             for (int j = 0; j < notas.length; j++) {
-                if (i == 0) {
-                    sumaPrimeraFila += notas[i][j];
-                } else if (i == 1) {
-                    sumaSegundaFila += notas[i][j];
-                } else if (i == 2) {
-                    sumaTerceraFila += notas[i][j];
+                switch (i) {
+                    case 0 ->
+                        sumaPrimeraFila += notas[i][j];
+                    case 1 ->
+                        sumaSegundaFila += notas[i][j];
+                    case 2 ->
+                        sumaTerceraFila += notas[i][j];
+
                 }
             }
         }
 
-        double notaMediaFinal
-                = (sumaPrimeraFila / 3) * (1.0 / 3)
-                + (sumaSegundaFila / 3) * (1.0 / 3)
-                + (sumaTerceraFila / 3) * (1.0 / 3);
+        double notaMediaFinal = (sumaPrimeraFila / 3) * (1.0 / 3) + (sumaSegundaFila / 3) * (1.0 / 3) + (sumaTerceraFila / 3) * (1.0 / 3);
 
         return notaMediaFinal;
     }
 
     public static int escrituraFichero(List<Estudiante> listadoEstudiantes) throws FileNotFoundException {
         try {
-            FileOutputStream fileOut = new FileOutputStream("personas.dat");
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            for (Estudiante estudiante : listadoEstudiantes) {
-                objectOut.writeObject(estudiante);
+            try (FileOutputStream fileOut = new FileOutputStream("personas.dat"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+                for (Estudiante estudiante : listadoEstudiantes) {
+                    objectOut.writeObject(estudiante);
+                }
             }
-            objectOut.close();
-            fileOut.close();
             System.out.println("Objetos almacenados correctamente");
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return 0;
     }
@@ -169,19 +164,17 @@ public class domingo {
 
         boolean finalFichero = false;
         try {
-            FileInputStream fileIn = new FileInputStream("personas.dat");
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-            System.out.println("Objetos almacenados en fichero");
-            while (!finalFichero) {
-                try {
-                    Estudiante estudiante = (Estudiante) objectIn.readObject();
-                    System.out.println(estudiante.toString());
-                } catch (EOFException e) {
-                    finalFichero = true;
+            try (FileInputStream fileIn = new FileInputStream("personas.dat"); ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+                System.out.println("Objetos almacenados en fichero");
+                while (!finalFichero) {
+                    try {
+                        Estudiante estudiante = (Estudiante) objectIn.readObject();
+                        System.out.println(estudiante.toString());
+                    } catch (EOFException e) {
+                        finalFichero = true;
+                    }
                 }
             }
-            objectIn.close();
-            fileIn.close();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
